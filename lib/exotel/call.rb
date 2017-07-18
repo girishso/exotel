@@ -89,7 +89,7 @@ module Exotel
       case response.code.to_i
         when 200...300 then Exotel::Response.new(response.body)
         when 401 then raise Exotel::AuthenticationError, "#{response.body} Verify your sid and token."
-        when 403 then Exotel::Response.new(response.body)
+        when 403, 400 then Exotel::Response.new(response.body)
         else
         raise Exotel::UnexpectedError, response.body
       end
