@@ -50,8 +50,8 @@ module Exotel
     def valid?(params, options)
       mandatory_keys = [:from, :to, :caller_id, :call_type]
       mandatory_keys << :flow_id if options[:type] == 'flow'
-
-      unless mandatory_keys.all?{|key| params.keys.include?(key)}
+      params_keys = params.keys
+      unless mandatory_keys.all?{|key| params_keys.include?(key)}
         raise Exotel::ParamsError, "Missing one or many required parameters."
       end
       valid_call_type?(params)
@@ -96,6 +96,3 @@ module Exotel
     end
   end
 end
-
-
-
